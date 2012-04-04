@@ -1,6 +1,6 @@
 Name:           acoustid-fingerprinter
 Version:        0.5.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Music AcoustID fingerprinting application
 
 Group:          System Environment/Libraries
@@ -72,6 +72,9 @@ fi
 
 
 %changelog
+* Wed Apr 04 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.5.1-4
+- Rebuilt
+
 * Fri Mar 02 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.5.1-3
 - Rebuilt for c++ ABI breakage
 
