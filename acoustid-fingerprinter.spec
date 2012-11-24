@@ -1,6 +1,6 @@
 Name:           acoustid-fingerprinter
 Version:        0.5.1
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Music AcoustID fingerprinting application
 
 Group:          System Environment/Libraries
@@ -72,6 +72,9 @@ fi
 
 
 %changelog
+* Sat Nov 24 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.5.1-7
+- Rebuilt for FFmpeg 1.0
+
 * Tue Jun 26 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.5.1-6
 - Rebuilt for FFmpeg
 
