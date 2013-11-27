@@ -1,0 +1,31 @@
+--- a/ffmpeg/audioconvert.h
++++ b/ffmpeg/audioconvert.h
+@@ -79,7 +79,7 @@ int avcodec_channel_layout_num_channels(
+  * @param fmt_name Format name, or NULL if unknown
+  * @return Channel layout mask
+  */
+-uint64_t avcodec_guess_channel_layout(int nb_channels, enum CodecID codec_id, const char *fmt_name);
++uint64_t avcodec_guess_channel_layout(int nb_channels, enum AVCodecID codec_id, const char *fmt_name);
+ 
+ struct AVAudioConvert;
+ typedef struct AVAudioConvert AVAudioConvert;
+--- a/decoder.h
++++ b/decoder.h
+@@ -39,6 +39,8 @@ extern "C" {
+ #define AV_SAMPLE_FMT_S16 SAMPLE_FMT_S16
+ #endif
+ 
++#define MAX_AUDIO_FRAME_SIZE 192000 // 1 second of 48khz 32bit audio
++
+ class Decoder
+ {
+ public:
+@@ -67,7 +69,7 @@ public:
+     static void initialize();
+ 
+ private:
+-	static const int BUFFER_SIZE = AVCODEC_MAX_AUDIO_FRAME_SIZE * 2;
++	static const int BUFFER_SIZE = MAX_AUDIO_FRAME_SIZE * 2;
+ 	uint8_t *m_buffer1;
+ 	uint8_t *m_buffer2;
+ 	std::string m_file_name;

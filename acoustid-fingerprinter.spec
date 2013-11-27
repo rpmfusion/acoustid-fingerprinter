@@ -1,12 +1,13 @@
 Name:           acoustid-fingerprinter
 Version:        0.6
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Music AcoustID fingerprinting application
 
 Group:          System Environment/Libraries
 License:        GPLv2+
 URL:            http://acoustid.org/fingerprinter
 Source:         https://github.com/downloads/lalinsky/%{name}/%{name}-%{version}.tar.gz
+Patch0:         acoustid-fingerprinter-0.6-ffmpeg.patch
 
 BuildRequires:  cmake
 BuildRequires:  qt4-devel
@@ -28,6 +29,7 @@ track title, artist name, album name, etc.
 
 %prep
 %setup -q
+%patch0 -p1 -b .ffmpeg
 
 
 %build
@@ -72,6 +74,9 @@ fi
 
 
 %changelog
+* Wed Nov 27 2013 Leigh Scott <leigh123linux@googlemail.com> - 0.6-6
+- Fix compile error
+
 * Wed Oct 02 2013 Nicolas Chauvet <kwizart@gmail.com> - 0.6-5
 - Rebuilt
 
