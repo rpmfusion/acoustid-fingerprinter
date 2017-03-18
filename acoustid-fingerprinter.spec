@@ -1,6 +1,6 @@
 Name:           acoustid-fingerprinter
 Version:        0.6
-Release:        10%{?dist}
+Release:        11%{?dist}
 Summary:        Music AcoustID fingerprinting application
 
 Group:          System Environment/Libraries
@@ -74,6 +74,9 @@ fi
 
 
 %changelog
+* Sat Mar 18 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 0.6-11
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Sun Oct 19 2014 Sérgio Basto <sergio@serjux.com> - 0.6-10
 - Rebuilt for FFmpeg 2.4.3
 
