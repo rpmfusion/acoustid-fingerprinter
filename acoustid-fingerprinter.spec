@@ -1,13 +1,17 @@
 Name:           acoustid-fingerprinter
 Version:        0.6
-Release:        11%{?dist}
+Release:        12%{?dist}
 Summary:        Music AcoustID fingerprinting application
 
-Group:          System Environment/Libraries
 License:        GPLv2+
 URL:            http://acoustid.org/fingerprinter
 Source:         https://github.com/downloads/lalinsky/%{name}/%{name}-%{version}.tar.gz
-Patch0:         acoustid-fingerprinter-0.6-ffmpeg.patch
+Patch0:         01-Fix-build-with-upcoming-Libav-10-release.patch
+Patch1:         02-CodecID.patch
+Patch2:         03-pkg-config.patch
+Patch3:         04-typo-warning.patch
+Patch4:         05-g++-6-char-cast.patch
+Patch5:         06-taglib.patch
 
 BuildRequires:  cmake
 BuildRequires:  qt4-devel
@@ -19,7 +23,6 @@ BuildRequires:  libchromaprint-devel
 Requires:       hicolor-icon-theme
 
 %description
-
 Acoustid fingerprinter is a cross-platform GUI application that uses
 Chromaprint to submit audio fingerprints from your music collection 
 to the Acoustid database. Only tagged audio files are submitted. 
@@ -28,19 +31,16 @@ but it will submit fingerprints for any files that have tags such as
 track title, artist name, album name, etc.
 
 %prep
-%setup -q
-%patch0 -p1 -b .ffmpeg
-
+%autosetup -p1
 
 %build
 %cmake -DCMAKE_BUILD_TYPE=Debug
 # removing the -O3 optimization flag for the release building type
 sed -i  "s/-O3 -DNDEBUG//g" CMakeCache.txt
-make %{?_smp_mflags}
-
+%make_build
 
 %install
-make install DESTDIR=%{buildroot}
+%make_install
 
 install -d -m755 %{buildroot}%{_datadir}/applications
 
@@ -54,26 +54,30 @@ install -p -D -m 0644 images/%{name}.svg  %{buildroot}%{_datadir}/icons/hicolor/
 
 %post
 /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-/usr/bin/update-mime-database %{_datadir}/mime &> /dev/null || :
 
 %postun
 if [ $1 -eq 0 ] ; then
     /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
     /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 fi
-/usr/bin/update-mime-database %{_datadir}/mime &> /dev/null || :
 
 %posttrans
 /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files
-%doc CHANGES.txt COPYING.txt 
+%doc CHANGES.txt
+%license COPYING.txt 
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 
 
 %changelog
+* Sun Jun 18 2017 Leigh Scott <leigh123linux@googlemail.com> - 0.6-12
+- Fix build (patches from Debian)
+- Update scriptlets
+- Update spec fire
+
 * Sat Mar 18 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 0.6-11
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 

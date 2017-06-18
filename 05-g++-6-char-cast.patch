@@ -1,0 +1,26 @@
+Description: Fix build failure on gcc 6
+ Array initializers for a char array fail for constants > 128
+ on platforms where char is signed.  Cast to fix it.
+Author: Petter Reinholdtsen <pere@debian.org>
+Bug-Debian: https://bugs.debian.org/811732
+Forwarded: no
+Reviewed-By: Petter Reinholdtsen <pere@debian.org>
+Last-Update: 2016-07-16
+
+--- acoustid-fingerprinter-0.6.orig/gzip.cpp
++++ acoustid-fingerprinter-0.6/gzip.cpp
+@@ -23,12 +23,12 @@ inline unsigned long calculateCrc32(cons
+ QByteArray gzipCompress(const QByteArray &data)
+ {
+ 	const char header[10] = {
+-		0x1f, 0x8b,	// ID1 + ID2
++		0x1f, static_cast<char>(0x8b),	// ID1 + ID2
+ 		8,			// Compression Method
+ 		0,			// Flags
+ 		0, 0, 0, 0, // Modification Time
+ 		2,			// Extra Flags
+-		255,		// Operating System
++		static_cast<char>(255),		// Operating System
+ 	};
+ 
+ 	QByteArray compressedData = qCompress(data);

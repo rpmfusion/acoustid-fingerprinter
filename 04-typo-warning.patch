@@ -1,0 +1,20 @@
+Description: Fix typo in warning message
+ Patch found in version 0.6-4.
+Author: Petter Reinholdtsen <pere@hungry.com>
+Origin: debian
+Forwarded: not-needed
+Origin: https://bitbucket.org/acoustid/acoustid-fingerprinter/commits/fb80fb843fd25d51b4d5334f22b31121fa3db677
+Reviewed-By: Petter Reinholdtsen <pere@hungry.com>
+Last-Update: 2016-07-16
+
+--- acoustid-fingerprinter-0.6.orig/fingerprinter.cpp
++++ acoustid-fingerprinter-0.6/fingerprinter.cpp
+@@ -261,7 +261,7 @@ void Fingerprinter::onRequestFinished(QN
+ 			stop = true;
+ 		}
+ 		else {
+-			qWarning() << "Submittion failed:" << errorMessage;
++			qWarning() << "Submission failed:" << errorMessage;
+ 		}
+ 	}
+ 	else if (error != QNetworkReply::NoError) {
