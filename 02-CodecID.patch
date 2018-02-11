@@ -1,13 +1,20 @@
-Description: Replace removed macros
- Rename CodecID to AVCodecID and replace AVCODEC_MAX_AUDIO_FRAME_SIZE
- with its last value 192000.
+From 5b3d32b26a7e4522b7c1b59b1d75367f2779c98d Mon Sep 17 00:00:00 2001
+From: Andreas Cadhalpun <Andreas.Cadhalpun@googlemail.com>
+Date: Sun, 17 Jul 2016 08:57:45 +0200
+Subject: [PATCH] Replace removed macros
 
-Author: Andreas Cadhalpun <Andreas.Cadhalpun@googlemail.com>
-Last-Update: <2014-05-13>
+Rename CodecID to AVCodecID and replace AVCODEC_MAX_AUDIO_FRAME_SIZE
+with its last value 192000.
+---
+ decoder.h             | 2 +-
+ ffmpeg/audioconvert.h | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
---- acoustid-fingerprinter-0.6.orig/decoder.h
-+++ acoustid-fingerprinter-0.6/decoder.h
-@@ -116,7 +116,7 @@ inline Decoder::Decoder(const std::strin
+diff --git a/decoder.h b/decoder.h
+index 310fe2d..92156de 100644
+--- a/decoder.h
++++ b/decoder.h
+@@ -116,7 +116,7 @@ inline Decoder::Decoder(const std::string &file_name)
  #endif
  {
  #ifdef HAVE_AV_AUDIO_CONVERT
@@ -16,9 +23,11 @@ Last-Update: <2014-05-13>
  #endif
  
  #if NEW_AVFRAME_API
---- acoustid-fingerprinter-0.6.orig/ffmpeg/audioconvert.h
-+++ acoustid-fingerprinter-0.6/ffmpeg/audioconvert.h
-@@ -75,11 +75,11 @@ int avcodec_channel_layout_num_channels(
+diff --git a/ffmpeg/audioconvert.h b/ffmpeg/audioconvert.h
+index 2b28e2e..69c0db2 100644
+--- a/ffmpeg/audioconvert.h
++++ b/ffmpeg/audioconvert.h
+@@ -75,11 +75,11 @@ int avcodec_channel_layout_num_channels(int64_t channel_layout);
  /**
   * Guess the channel layout
   * @param nb_channels

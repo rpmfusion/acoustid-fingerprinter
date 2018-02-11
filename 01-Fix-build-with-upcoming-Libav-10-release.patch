@@ -1,8 +1,14 @@
-Description: Fix build with upcoming Libav 10 release
- Drops support for pre-0.8 releases to reduce clutter, but those are over
- three years old now and no current distros carry them.
-Forwarded: https://bitbucket.org/acoustid/acoustid-fingerprinter/pull-request/3/fix-build-with-upcoming-libav-10-release/diff
-Author: Anton Khirnov <anton@khirnov.net> 
+From 2c778334a9fc2f0ccf9b1d7635c116bce6509748 Mon Sep 17 00:00:00 2001
+From: Anton Khirnov <anton@khirnov.net>
+Date: Sun, 17 Jul 2016 08:56:40 +0200
+Subject: [PATCH] Fix build with upcoming Libav 10 release
+
+Drops support for pre-0.8 releases to reduce clutter, but those are over
+three years old now and no current distros carry them.
+---
+ decoder.h | 84 ++++++++++++++++++++++++---------------------------------------
+ 1 file changed, 32 insertions(+), 52 deletions(-)
+
 diff --git a/decoder.h b/decoder.h
 index 028f58f..310fe2d 100644
 --- a/decoder.h
@@ -31,7 +37,7 @@ index 028f58f..310fe2d 100644
  class Decoder
  {
  public:
-@@ -67,8 +69,6 @@ public:
+@@ -67,8 +69,6 @@ class Decoder
      static void initialize();
  
  private:
@@ -40,7 +46,7 @@ index 028f58f..310fe2d 100644
  	uint8_t *m_buffer2;
  	std::string m_file_name;
  	std::string m_error;
-@@ -77,6 +77,7 @@ private:
+@@ -77,6 +77,7 @@ class Decoder
  	bool m_codec_open;
  	AVStream *m_stream;
      static QMutex m_mutex;
