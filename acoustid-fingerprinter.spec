@@ -1,6 +1,6 @@
 Name:           acoustid-fingerprinter
 Version:        0.6
-Release:        17%{?dist}
+Release:        18%{?dist}
 Summary:        Music AcoustID fingerprinting application
 
 License:        GPLv2+
@@ -62,6 +62,9 @@ install -p -D -m 0644 images/%{name}.svg  %{buildroot}%{_datadir}/icons/hicolor/
 
 
 %changelog
+* Thu Mar 08 2018 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 0.6-18
+- Rebuilt for new ffmpeg snapshot
+
 * Thu Mar 08 2018 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 0.6-17
 - Rebuilt for new ffmpeg snapshot
 
