@@ -1,3 +1,5 @@
+%undefine __cmake_in_source_build
+
 Name:           acoustid-fingerprinter
 Version:        0.6
 Release:        24%{?dist}
@@ -38,10 +40,10 @@ track title, artist name, album name, etc.
 %cmake3 -DCMAKE_BUILD_TYPE=Debug -GNinja
 # removing the -O3 optimization flag for the release building type
 sed -i  "s/-O3 -DNDEBUG//g" CMakeCache.txt
-%ninja_build
+%cmake3_build
 
 %install
-%ninja_install
+%cmake3_install
 
 install -d -m755 %{buildroot}%{_datadir}/applications
 
