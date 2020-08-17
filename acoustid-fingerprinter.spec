@@ -39,7 +39,7 @@ track title, artist name, album name, etc.
 %build
 %cmake3 -DCMAKE_BUILD_TYPE=Debug -GNinja
 # removing the -O3 optimization flag for the release building type
-sed -i  "s/-O3 -DNDEBUG//g" CMakeCache.txt
+sed -i  "s/-O3 -DNDEBUG//g" %{_vpath_builddir}/CMakeCache.txt
 %cmake3_build
 
 %install
