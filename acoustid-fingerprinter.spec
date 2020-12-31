@@ -2,7 +2,7 @@
 
 Name:           acoustid-fingerprinter
 Version:        0.6
-Release:        24%{?dist}
+Release:        25%{?dist}
 Summary:        Music AcoustID fingerprinting application
 
 License:        GPLv2+
@@ -64,6 +64,9 @@ install -p -D -m 0644 images/%{name}.svg  %{buildroot}%{_datadir}/icons/hicolor/
 
 
 %changelog
+* Thu Dec 31 2020 Leigh Scott <leigh123linux@gmail.com> - 0.6-25
+- Rebuilt for new ffmpeg snapshot
+
 * Mon Aug 17 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.6-24
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
