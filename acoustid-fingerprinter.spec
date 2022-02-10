@@ -10,15 +10,20 @@ URL:            https://github.com/acoustid/%{name}
 Source:         %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Patch0:         %{url}/commit/2c778334a9fc2f0ccf9b1d7635c116bce6509748.patch#/01-Fix-build-with-upcoming-Libav-10-release.patch
 Patch1:         %{url}/commit/5b3d32b26a7e4522b7c1b59b1d75367f2779c98d.patch#/02-CodecID.patch
-Patch2:         03-pkg-config.patch
+#Patch2:         03-pkg-config.patch
 Patch3:         %{url}/commit/6cb95c67cd9699fb3d703451eb1c4bcabc96e25f.patch#/04-typo-warning.patch
 Patch4:         %{url}/commit/632e87969c3a5562a5d4842b03613267ba6236b2.patch#/05-g++-6-char-cast.patch
 Patch5:         %{url}/commit/681ef059e4bdb0a9b1a073d6cbb9bb54e993fef9.patch#/06-taglib.patch
+Patch6:         compat-ffmpeg4.patch
 
-BuildRequires:  cmake3
+BuildRequires:  cmake
 BuildRequires:  ninja-build
 BuildRequires:  qt4-devel
+%if 0%{?fedora} && 0%{?fedora} > 35
+BuildRequires:  compat-ffmpeg4-devel
+%else
 BuildRequires:  ffmpeg-devel
+%endif
 BuildRequires:  taglib-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  libchromaprint-devel
@@ -37,13 +42,13 @@ track title, artist name, album name, etc.
 %autosetup -p1
 
 %build
-%cmake3 -DCMAKE_BUILD_TYPE=Debug -GNinja
+%cmake -DCMAKE_BUILD_TYPE=Debug -GNinja
 # removing the -O3 optimization flag for the release building type
 sed -i  "s/-O3 -DNDEBUG//g" %{_vpath_builddir}/CMakeCache.txt
-%cmake3_build
+%cmake_build
 
 %install
-%cmake3_install
+%cmake_install
 
 install -d -m755 %{buildroot}%{_datadir}/applications
 
