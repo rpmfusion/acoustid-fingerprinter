@@ -1,16 +1,19 @@
 --- a/cmake/modules/FindFFmpeg.cmake
 +++ b/cmake/modules/FindFFmpeg.cmake
-@@ -33,6 +33,7 @@ MACRO(FFMPEG_FIND varname shortname head
+@@ -33,6 +33,8 @@ MACRO(FFMPEG_FIND varname shortname head
  		/Library/Frameworks
  		/usr/local/include
  		/usr/include/
++		/usr/include/ffmpeg
 +		/usr/include/compat-ffmpeg4
  		/sw/include # Fink
  		/opt/local/include # DarwinPorts
  		/opt/csw/include # Blastwave
-@@ -58,6 +59,7 @@ MACRO(FFMPEG_FIND varname shortname head
+@@ -57,7 +59,9 @@ MACRO(FFMPEG_FIND varname shortname head
+         /usr/local/lib
          /usr/local/lib64
          /usr/lib
++        /usr/lib/compat-ffmpeg4
          /usr/lib64
 +        /usr/lib64/compat-ffmpeg4
          /sw/lib
