@@ -2,7 +2,7 @@
 
 Name:           acoustid-fingerprinter
 Version:        0.6
-Release:        30%{?dist}
+Release:        31%{?dist}
 Summary:        Music AcoustID fingerprinting application
 
 License:        GPLv2+
@@ -15,10 +15,11 @@ Patch3:         %{url}/commit/6cb95c67cd9699fb3d703451eb1c4bcabc96e25f.patch#/04
 Patch4:         %{url}/commit/632e87969c3a5562a5d4842b03613267ba6236b2.patch#/05-g++-6-char-cast.patch
 Patch5:         %{url}/commit/681ef059e4bdb0a9b1a073d6cbb9bb54e993fef9.patch#/06-taglib.patch
 Patch6:         compat-ffmpeg4.patch
+Patch7:         %{url}/pull/16/commits/3d893768131511e984ea47469c4c8fc9dc77e72f.patch#/07-qt5.patch
 
 BuildRequires:  cmake
 BuildRequires:  ninja-build
-BuildRequires:  qt4-devel
+BuildRequires:  qt5-qtbase-devel
 %if 0%{?fedora} && 0%{?fedora} > 35
 BuildRequires:  compat-ffmpeg4-devel
 %else
@@ -62,13 +63,16 @@ install -p -D -m 0644 images/%{name}.svg  %{buildroot}%{_datadir}/icons/hicolor/
 
 %files
 %doc CHANGES.txt
-%license COPYING.txt 
+%license COPYING.txt
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 
 
 %changelog
+* Mon Nov 21 2022 Sérgio Basto <sergio@serjux.com> - 0.6-31
+- Switch to Qt5
+
 * Sat Aug 06 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 0.6-30
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
